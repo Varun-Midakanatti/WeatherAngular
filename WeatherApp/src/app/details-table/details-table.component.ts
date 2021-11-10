@@ -24,9 +24,25 @@ export class DetailsTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(this.weather && this.weather.data){
+      for(let i=0; i<this.weather.data.timelines[1].intervals.length; i++) {
+        let val = this.weather.data.timelines[1].intervals[i].values;
+        let hour:any = new Date(val.sunriseTime).getHours();
+        hour = hour < 10 ? "0" + hour : hour;
+        let minutes: any = new Date(val.sunriseTime).getMinutes();
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        let sunRise = hour + ":" + minutes + ":00";
+        hour = new Date(val.sunsetTime).getHours();
+        hour = hour < 10 ? "0" + hour : hour;
+        minutes = new Date(val.sunsetTime).getMinutes();
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        let sunSet = hour + ":" + minutes + ":00";
+        this.weather.data.timelines[1].intervals[i].values.sunriseTime = sunRise;
+        this.weather.data.timelines[1].intervals[i].values.sunsetTime = sunSet;
+      }
+    }
   }
 
-  // @Input() showWeatherTable!: boolean;
   @Input() weather!: any;
   @Input() showWeatherTable!: boolean;
   @Input() currentIndex!: number;

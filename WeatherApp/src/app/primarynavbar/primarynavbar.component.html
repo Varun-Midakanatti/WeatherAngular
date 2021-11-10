@@ -7,7 +7,7 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="2" (click)='switchTab(2)'>
-      <a ngbNavLink>Favorite</a>
+      <a ngbNavLink>Favorites</a>
       <ng-template ngbNavContent>
         <app-favorites-tab (locationEmitter)="emitToForm($event)" [weather]='weather' [location_string]='location_string'></app-favorites-tab>
       </ng-template>

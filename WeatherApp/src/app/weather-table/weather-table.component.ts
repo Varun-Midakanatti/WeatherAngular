@@ -137,12 +137,8 @@ export class WeatherTableComponent implements OnInit {
   @Input() currentIndex!: number;
   @Input() duplicate!: boolean;
 
-  // @Input() favoriteLocation!: string;
-
-  // @Output() weatherModifiedEmitter = new EventEmitter<any>();
   @Output() detailsTabEmitter =  new EventEmitter<boolean>();
   @Output() indexEmitter = new EventEmitter<number> ();
-  // @Output() favoritesEmitter = new EventEmitter<boolean> ();
 
   showDetailsTab: boolean = false;
   existing: any;
@@ -153,25 +149,45 @@ export class WeatherTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("duplicate", this.duplicate);
+    // // console.log("Init table");
+    // this.existing = localStorage.getItem("locations");
+    // // console.log("exisitng", this.existing);
+    // let loc = {
+    //   city: this.location_string.split(",")[0],
+    //   state: this.location_string.split(',')[1]
+    // }
+    // if(this.existing?.length) {
+    //   // console.log("1");
+    //   this.existing = JSON.parse(this.existing);
+    //   for(let i=0; i<this.existing.length; i++) {
+    //     if(this.existing[i].city === loc.city) {
+    //       // console.log("Found")
+    //       this.index = i
+    //       this.duplicate = true
+    //     }
+    //   }
+    // }
+  }
+
+  ngOnChanges(): void {
+    console.log("Init table");
     this.existing = localStorage.getItem("locations");
+    console.log("exisitng", this.existing);
     let loc = {
       city: this.location_string.split(",")[0],
       state: this.location_string.split(',')[1]
     }
     if(this.existing?.length) {
+      console.log("1");
       this.existing = JSON.parse(this.existing);
       for(let i=0; i<this.existing.length; i++) {
         if(this.existing[i].city === loc.city) {
+          console.log("Found")
           this.index = i
           this.duplicate = true
         }
       }
     }
-  }
-
-  ngOnChanges(): void {
-    console.log("Location string", this.location_string);
     if (this.weather && this.weather.data && this.weather.data.timelines[1].intervals.length) {
       for (let i=0; i < this.weather.data.timelines[1].intervals.length; i++)
       {
@@ -188,20 +204,6 @@ export class WeatherTableComponent implements OnInit {
       let weatherImage = this.weatherDict[this.weather.data.timelines[1].intervals[i].values.weatherCode].img;
       this.weather.data.timelines[1].intervals[i].weatherImage = weatherImage;
       }
-      // this.existing = localStorage.getItem("locations");
-      // let loc = {
-      //   city: this.location_string.split(",")[0],
-      //   state: this.location_string.split(',')[1]
-      // }
-      // if(this.existing?.length) {
-      //   this.existing = JSON.parse(this.existing);
-      //   for(let i=0; i<this.existing.length; i++) {
-      //     if(this.existing[i].city === loc.city) {
-      //       this.index = i
-      //       this.duplicate = true
-      //     }
-      //   }
-      // }
     }
   }
 

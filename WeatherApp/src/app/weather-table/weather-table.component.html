@@ -6,16 +6,12 @@
     <div class="row">
         <div class="col-lg-8"></div>
         <div class="col-lg-4" [ngStyle]="{'text-align': 'end'}">
-            <button class="btn btn-outline" (click)="favClicked()"><i *ngIf="!duplicate" class="material-icons">star_border</i><i *ngIf="duplicate" class="material-icons">star</i></button>
-            <button class="btn btn-light" (click)="viewDetails()" [disabled]="!(currentIndex >= 0)">Details ></button>
+            <button class="btn btn-outline-dark" (click)="favClicked()"><i *ngIf="!duplicate" class="material-icons">star_border</i><i *ngIf="duplicate" [ngStyle]="{'color': 'gold'}" class="material-icons">star</i></button>
+            <button class="btn" (click)="viewDetails()" [disabled]="!(currentIndex >= 0)">Details ></button>
         </div>
     </div>
     <div class="row">
-        <div class= "col-lg-3">
-        </div>
-        <div class="col-lg-3">
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs justify-content-end">        
                 <li [ngbNavItem]="1" class="">
                 <a ngbNavLink>Day View</a>

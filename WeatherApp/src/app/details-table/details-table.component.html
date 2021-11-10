@@ -1,60 +1,60 @@
 <div *ngIf="!showWeatherTable" [@slideInOut]>
 <div class="row">
     <div class="col-lg-4 col-md-3 col-sm-1" [ngStyle]="{'text-align': 'left'}">
-        <button class="btn btn-outline" (click)="viewList()">&lt; List</button>
+        <button class="btn btn-outline-dark" (click)="viewList()">&lt; List</button>
     </div>
     <div *ngIf="weather && weather.data" class="col-lg-4 col-md-6 col-sm-10">
        <h5>{{weather.data.timelines[1] && weather.data.timelines[1].intervals[currentIndex].formattedDate}}</h5>
     </div>
     <div class="col-lg-4 col-md-3 col-sm-1" [ngStyle]="{'text-align': 'right'}">
-        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{tweetMsg}}&hashtags=CSCI571WeatherForecast" target="_blank">
-            <button class="btn btn-outline"><i class="bi bi-twitter"></i></button>
+        <a class="twitter-share-button" [ngStyle]="{'color': 'blue'}" href="https://twitter.com/intent/tweet?text={{tweetMsg}}&hashtags=CSCI571WeatherForecast" target="_blank">
+            <button class="btn" [ngStyle]="{'background-color': '#1d9bf0'}"><i class="bi bi-twitter" [ngStyle]="{'color': 'white'}"></i></button>
         </a>
     </div>
 </div>
-
+<br/>
 <table *ngIf="weather && weather.data" class="table table-striped" [ngStyle] = "{'text-align': 'left'}">
     <tbody>
-    <tr>
-      <th scope="row">Status</th>
-      <td>{{weather.data.timelines[1].intervals[currentIndex].weatherStatus}}</td>
-    </tr>
-    <tr>
-        <th scope="row">Max Temperature</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperatureMax}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Min Temperature</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperatureMin}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Apparent Temperature</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperature}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Sun Rise Time</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.sunriseTime}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Sun Set Time</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.sunsetTime}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Humidity</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.humidity}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Wind Speed</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.windSpeed}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Visibility</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.visibility}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Cloud Cover</th>
-        <td>{{weather.data.timelines[1].intervals[currentIndex].values.cloudCover}}</td>
-      </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Status</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].weatherStatus}}</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Max Temperature</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperatureMax}} &#8457;</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Min Temperature</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperatureMin}} &#8457;</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Apparent Temperature</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.temperature}} &#8457;</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Sun Rise Time</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.sunriseTime}}</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Sun Set Time</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.sunsetTime}}</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Humidity</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.humidity}} %</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Wind Speed</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.windSpeed}} mph</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Visibility</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.visibility}} mi</td>
+        </tr>
+        <tr>
+            <th scope="row" class="col-lg-5">Cloud Cover</th>
+            <td>{{weather.data.timelines[1].intervals[currentIndex].values.cloudCover}} %</td>
+        </tr>
     </tbody>
 </table>
 <div id="map">

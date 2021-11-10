@@ -131,6 +131,8 @@ export class UserinputComponent implements OnInit {
   }
 
   async callClicked(event: string) {
+    this.weather = {};
+    this.showProgressBar = true;
     console.log("Final location", event);
     const geokey = "AIzaSyCJJgHbGCmnExuO80cS-J7NDGbuU4YRWqY";
     let address = ""
