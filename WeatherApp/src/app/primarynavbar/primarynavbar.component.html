@@ -1,0 +1,17 @@
+<ul ngbNav #nav="ngbNav" [activeId]='active' class="nav-pills" style="display: inline-flex;">
+    <li [ngbNavItem]="1" (click)='switchTab(1)'>
+      <a ngbNavLink>Results</a>
+      <ng-template ngbNavContent>
+        <app-weather-table (indexEmitter)="updateCurrentIndex($event)" (detailsTabEmitter)="toggleTables($event)" [duplicate]="duplicate" [location_string]="location_string" [autoLocationChecked]="autoLocationChecked" [weather]="weather" [hidden]="!showWeatherTable" [showWeatherTable]="showWeatherTable" [currentIndex]="currentIndex"></app-weather-table>
+        <app-details-table *ngIf="weather && weather.data" (listTabEmitter)="toggleTables($event)" [location_string]='location_string' [weather]="weather" [hidden]="showWeatherTable || !weather" [showWeatherTable]="showWeatherTable" [currentIndex]="currentIndex"></app-details-table>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" (click)='switchTab(2)'>
+      <a ngbNavLink>Favorite</a>
+      <ng-template ngbNavContent>
+        <app-favorites-tab (locationEmitter)="emitToForm($event)" [weather]='weather' [location_string]='location_string'></app-favorites-tab>
+      </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-5"></div>
+<app-progress-bar [hidden]="showProgressBar"></app-progress-bar>

@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div *ngIf="weather && weather.data && showWeatherTable" [@slideInOut]>
+    <h5><b>Forecast at {{location_string}}</b></h5>
+    <div class="row">
+        <div class="col-lg-8"></div>
+        <div class="col-lg-4" [ngStyle]="{'text-align': 'end'}">
+            <button class="btn btn-outline" (click)="favClicked()"><i *ngIf="!duplicate" class="material-icons">star_border</i><i *ngIf="duplicate" class="material-icons">star</i></button>
+            <button class="btn btn-light" (click)="viewDetails()" [disabled]="!(currentIndex >= 0)">Details ></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class= "col-lg-3">
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs justify-content-end">        
+                <li [ngbNavItem]="1" class="">
+                <a ngbNavLink>Day View</a>
+                <ng-template ngbNavContent>
+                    <table class="table" [ngStyle] = "{'text-align': 'left'}">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Temp High (&#8457;)</th>
+                            <th scope="col">Temp Low (&#8457;)</th>
+                            <th scope="col">Wind Speed (mph)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let day of weather.data.timelines[1].intervals; index as i">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td><a href="#null" (click)="updateIndex(i)">{{day.formattedDate}}</a></td>
+                        <td><img [src]="day.weatherImage" [ngStyle]="{'width': '35px'}" />{{day.weatherStatus}}</td>
+                        <td>{{day.values.temperatureMax}}</td>
+                        <td>{{day.values.temperatureMin}}</td>
+                        <td>{{day.values.windSpeed}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                <a ngbNavLink>Daily Temp. Chart</a>
+                <ng-template ngbNavContent>
+                    <app-temp-range-chart [weather]="weather"></app-temp-range-chart>
+                </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                <a ngbNavLink>Meteogram</a>
+                <ng-template ngbNavContent>
+                    <app-meteogram [weather]='weather'></app-meteogram>
+                </ng-template>
+                </li>
+            </ul>
+    </div>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+      
+</div>

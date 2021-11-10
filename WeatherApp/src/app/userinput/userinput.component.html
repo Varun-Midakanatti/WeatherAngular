@@ -1,0 +1,106 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container-sm rounded" style="background-color: #f4f4f4; margin-top: 20px; border: 1px solid #f8f9fa;">
+<div class="row" style="text-align: center; display: block">
+    <p style="margin: 30px 0px;"><b>Weather Search </b>&#x1F325;</p>
+</div>
+<div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-10">
+    <div class="mb-3 row">
+        <label for="inputStreet" class="col-sm-3 col-form-label">Street <span style="color: red;">*</span></label>
+        <div class="col-sm-9">
+        <input type="text" class="form-control" id="inputStreet" [value]="street" [ngStyle]="{'border-color': !streetHidden ? 'red' : '#ced4da'}" [disabled]="disable" (focusout)="onStreetChange($event)">
+        <div [ngStyle]="{'font-size': 'small', 'color':'red'}" *ngIf="!streetHidden">Please enter a valid street.</div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputCity" class="col-sm-3 col-form-label">City <span style="color: red;">*</span></label>
+        <div class="col-sm-9">
+        <input type="text" class="form-control" id="inputCity" [value]="city" [ngStyle]="{'border-color': !cityHidden ? 'red' : '#ced4da'}" [disabled]="disable" (focusout)="onCityChange($event)">
+        <div [ngStyle]="{'font-size': 'small', 'color':'red'}" *ngIf="!cityHidden">Please enter a valid city.</div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputStreet" class="col-sm-3 col-form-label">State <span style="color: red;">*</span></label>
+        <div class="col-sm-5">
+        <input type="text" class="form-control" list="states" [value]="state" id="inputState" placeholder="Select your state" [disabled]="disable" (change)="onStateChange($event)"/>
+            <datalist id="states">
+            <option>Alabama</option>
+            <option>Alaska</option>
+            <option>Arizona</option>
+            <option>Arkansas</option>
+            <option>California</option>
+            <option>Colorado</option>
+            <option>Connecticut</option>
+            <option>Delaware</option>
+            <option>District Of Columbia</option>
+            <option>Florida</option>
+            <option>Georgia</option>
+            <option>Hawaii</option>
+            <option>Idaho</option>
+            <option>Illinois</option>
+            <option>Indiana</option>
+            <option>Iowa</option>
+            <option>Kansas</option>
+            <option>Kentucky</option>
+            <option>Louisiana</option>
+            <option>Maine</option>
+            <option>Maryland</option>
+            <option>Massachusetts</option>
+            <option>Michigan</option>
+            <option>Minnesota</option>
+            <option>Mississippi</option>
+            <option>Missouri</option>
+            <option>Montana</option>
+            <option>Nebraska</option>
+            <option>Nevada</option>
+            <option>New Hampshire</option>
+            <option>New Jersey</option>
+            <option>New Mexico</option>
+            <option>New York</option>
+            <option>North Carolina</option>
+            <option>North Dakota</option>
+            <option>Ohio</option>
+            <option>Oklahoma</option>
+            <option>Oregon</option>
+            <option>Pennsylvania</option>
+            <option>Rhode Island</option>
+            <option>South Carolina</option>
+            <option>South Dakota</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Utah</option>
+            <option>Vermont</option>
+            <option>Virginia</option>
+            <option>Washington</option>
+            <option>West Virginia</option>
+            <option>Wisconsin</option>
+            <option>Wyoming</option>
+            </datalist>
+        </div>
+    </div>
+    <hr />
+    <div class="mb-3 row">
+        <label for="autoDetect" class="col-sm-3 col-form-label">Auto-detect Location <span style="color: red;">*</span></label>
+        <div class="col-sm-9">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [checked]="autoLocationChecked" (click)="onAutoLocationChecked()">
+            <label class="form-check-label" for="flexCheckDefault">
+            Current Location
+            </label>
+        </div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <button type="button" class="btn btn-primary" style="width: 100px; margin-right: 5px;" (click)="onSearchClicked()" [disabled]="!autoLocationChecked && !(city.length > 0 && street.length > 0 && state.length > 0)"><i class="material-icons">search</i>Search</button>
+        <button type="button" class="btn btn-outline-dark" style="width: 100px;" (click)="clearValues()"><i class="material-icons">clear_all</i>Clear</button>
+    </div>
+    </div>
+    <div class="col-lg-1">
+    </div>
+</div>
+</div>
+<div class="mt-5 row" style="text-align: center;">
+    <app-primarynavbar (activeTabEmitter)='switchTab($event)' (locationEmitter)="callClicked($event)" [active]='active' [autoLocationChecked]="autoLocationChecked" [location_string]="location_string" [showProgressBar]="!showProgressBar" [weather]="weather" [switchToFirstTab]="switchToFirstTab" [showWeatherTable]="showWeatherTable"></app-primarynavbar>
+</div>
